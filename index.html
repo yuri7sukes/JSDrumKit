@@ -54,7 +54,7 @@
   <audio data-key="f F а А" src="sounds/openhat.wav"></audio>
   <audio data-key="g G п П" src="sounds/boom.wav"></audio>
   <audio data-key="h H р Р" src="sounds/ride.wav"></audio>
-  <audio data-key="j J о О"" src="sounds/snare.wav"></audio>
+  <audio data-key="j J о О" src="sounds/snare.wav"></audio>
   <audio data-key="k K л Л" src="sounds/tom.wav"></audio>
   <audio data-key="l L д Д" src="sounds/tink.wav"></audio>
 
@@ -66,26 +66,26 @@
 
   function playSound(e) {
   
-  const audioElements = document.querySelectorAll('audio[data-key]');
-  const keyElements = document.querySelectorAll('div[data-key]');
+    const audioElements = document.querySelectorAll('audio[data-key]');
+    const keyElements = document.querySelectorAll('div[data-key]');
 
 
-  let audio = null;
-  let key = null;
+    let audio = null;
+    let key = null;
   
-  audioElements.forEach((elem) => {
-    const keys = elem.getAttribute('data-key').split(' ');
-    if (keys.includes(e.key)) {
+    audioElements.forEach((elem) => {
+      const keys = elem.getAttribute('data-key').split(' ');
+      if (keys.includes(e.key)) {
       audio = elem; 
-    }
-  });
+      }
+    });
 
-  keyElements.forEach((elem) => {
-    const keys = elem.getAttribute('data-key').split(' ');
-    if (keys.includes(e.key)) {
-      key = elem;
-    }
-  });
+    keyElements.forEach((elem) => {
+      const keys = elem.getAttribute('data-key').split(' ');
+      if (keys.includes(e.key)) {
+        key = elem;
+      }
+    });
 
   if (!audio || !key) return;
 
@@ -97,6 +97,18 @@
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
   window.addEventListener('keydown', playSound);
+
+  const buttons = document.querySelectorAll(".key");
+  buttons.forEach((button) => {
+	  button.addEventListener("click", () =>{
+	  const btnDataType = button.getAttribute("data-key")
+	  const audio = document.querySelector(`audio[data-key="${btnDataType}"]`)
+	  
+    audio.currentTime = 0;
+    audio.play();
+    button.classList.add('playing');
+	  })
+  })
 </script>
 
 
